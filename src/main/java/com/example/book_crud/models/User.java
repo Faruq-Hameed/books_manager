@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity // makes class a DB table

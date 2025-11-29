@@ -3,8 +3,6 @@ package com.example.book_crud.services;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import com.example.book_crud.repositories.UserRepository;
 import com.example.book_crud.models.Book;
 import com.example.book_crud.models.User;
