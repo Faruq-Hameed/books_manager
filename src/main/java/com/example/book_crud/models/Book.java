@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,7 @@ public class Book {
     private int productionYear;
 
     // Many books can belong to one author
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "author_id") // creates author_id foreign key in DB
     private User author;
 

@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity // makes class a DB table
+@Table(name = "users")   // avoid reserved keyword
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto ID

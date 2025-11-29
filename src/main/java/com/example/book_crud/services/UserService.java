@@ -10,33 +10,44 @@ import com.example.book_crud.repositories.UserRepository;
 @Service
 public class UserService {
 
-    private final UserRepository repo;
+    private final UserRepository userRepo;
 
-    public UserService(UserRepository repo) {
-        this.repo = repo;
+    public UserService(UserRepository userRepo) {
+        this.userRepo = userRepo;
     }
 
     public List<User> getAllUsers() {
-        return repo.findAll();
+        return userRepo.findAll();
     }
 
     public User getUser(Long id) {
-        return repo.findById(id)
+        return userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public User createUser(String name) {
+        System.out.println("name is " + name);
         User user = new User(name);
-        return repo.save(user);
+        System.out.println("User is = " + user);
+        return userRepo.save(user);
     }
 
     public User updateUser(Long id, String name) {
         User user = getUser(id); // reuse method
         user.setName(name);
-        return repo.save(user);
+        return userRepo.save(user);
     }
 
     public void deleteUser(Long id) {
-        repo.deleteById(id);
+        getUser(id);
+        userRepo.deleteById(id);
+    }
+
+    public User getUserByName(String name) {
+        User user = userRepo.findByName(name);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        return user;
     }
 }
