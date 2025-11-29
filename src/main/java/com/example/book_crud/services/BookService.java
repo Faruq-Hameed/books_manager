@@ -24,6 +24,10 @@ public class BookService {
         return bookRepo.findAll(); // I am using the default interface here
     }
 
+    public Book getBookById(Long bookId) {
+        return this.bookRepo.findById(bookId).orElseThrow(() -> new RuntimeException("Book no found"));
+    }
+
     public Book addBook(String title, int productionYear, Long authorId) {
         User author = userRepo.findById(authorId)
                 .orElseThrow(() -> new RuntimeException("Author not found"));
@@ -34,8 +38,7 @@ public class BookService {
     }
 
     public Book updateBook(Long bookId, String title, Integer productionYear) {
-        Book book = bookRepo.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Book not found to update"));
+        Book book = getBookById(bookId);
 
         if (title != null && !title.isEmpty()) {
             book.setTitle(title);
@@ -47,7 +50,8 @@ public class BookService {
         return bookRepo.save(book);
     }
 
-    public void deleteBook(Long id) {
-        bookRepo.deleteById(id);
+    public void deleteBook(Long bookId) {
+        getBookById(bookId);//verify if book exists
+        bookRepo.deleteById(bookId);
     }
 }
