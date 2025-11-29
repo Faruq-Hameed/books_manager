@@ -1,0 +1,45 @@
+package com.example.book_crud.models;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
+@Entity
+public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    private int productionYear;
+
+    // Many books can belong to one author
+    @ManyToMany
+    @JoinColumn(name = "author_id") //creates author_id foreign key in DB
+    private User author;
+
+    // the function of the non‑parameterized constructor is to
+    // let JPA/Hibernate (and other frameworks)
+    // instantiate the entity automatically when fetching from the database.
+    public Book() {
+    }
+
+    public Book(String title, int productionYear, User author) {
+        this.title = title;
+        this.productionYear = productionYear;
+        this.author = author;
+    }
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+}
