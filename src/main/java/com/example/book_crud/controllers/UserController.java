@@ -25,12 +25,11 @@ public class UserController {
         this.userService = userService;
     }
 
-   @PostMapping
-public User createUser(@RequestBody User user) {
-    System.out.println("User from controller is :" + user.getName());
-    return userService.createUser(user.getName());
-}
-
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        System.out.println("User from controller is :" + user.getName());
+        return userService.createUser(user.getName());
+    }
 
     @GetMapping // available with Get at /users
     public List<User> getUsers() {

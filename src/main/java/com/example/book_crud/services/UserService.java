@@ -28,7 +28,7 @@ public class UserService {
     public User createUser(String name) {
         System.out.println("name is " + name);
         User user = new User(name);
-        System.out.println("User is = " + user);
+        // System.out.println("User is = " + user);
         return userRepo.save(user);
     }
 
